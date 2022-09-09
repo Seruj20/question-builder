@@ -1,0 +1,31 @@
+.qb-question__card{
+  display: flex;
+}
+
+.qb-question__card-container{
+  margin-top: 15px;
+}
+.qb-question__card-title{
+  flex-basis: 90%;
+  padding-top: 15px;
+}
+.qb-question__card-actions{
+  button{
+    margin: 0;
+  }
+  mat-button{
+    min-width: 40px;
+  }
+}
+.qb-question__card-box-container{
+  display: flex;
+}
+.mat-radio-button{
+  margin-top: 4px;
+}
+.qb-question__card-footer{
+  span{
+    padding-left: 15px;
+    font-weight: 500;
+  }
+}

@@ -1,0 +1,8 @@
+<ng-container *ngFor="let question of questions">
+  <app-qb-question-card
+    [question]="question"
+    (deleteQuestion)="handleDeleteQuestion.emit($event)"
+    (editQuestion)="handleEditQuestion.emit($event)">
+  </app-qb-question-card>
+</ng-container>
+

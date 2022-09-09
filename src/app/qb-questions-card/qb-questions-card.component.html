@@ -1,0 +1,57 @@
+<mat-card class="qb-question__card-container">
+  <div class="qb-question__card">
+    <mat-card-title class="qb-question__card-title">{{question.text}}</mat-card-title>
+    <mat-card-actions class="qb-question__card-actions">
+      <button mat-button (click)="handleEditQuestion()">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-button (click)="handleDeleteQuestion()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-card-actions>
+  </div>
+  <mat-card-content *ngIf="listView">
+
+    <ng-container [ngSwitch]="question.type">
+      <div *ngSwitchCase="'Open'" [formGroup]="formGroup">
+        <mat-form-field appearance="fill">
+          <textarea matInput formControlName="answer" ></textarea>
+        </mat-form-field>
+
+      </div>
+      <div *ngSwitchCase="'SingleChoice'" [formGroup]="formGroup">
+
+        <mat-radio-group aria-label="Select answer:" formControlName="answer" >
+          <div class="qb-question__card-box-container" *ngFor="let option of question.answerOptions">
+            <mat-radio-button value="{{option}}">{{option}}</mat-radio-button>
+          </div>
+        </mat-radio-group>
+
+
+      </div>
+      <div *ngSwitchCase="'MultipleChoice'">
+
+        <div class="qb-question__card-box-container">
+          <ul>
+            <li *ngFor="let option of question.answerOptions">
+              <mat-checkbox
+                value="{{option}}"
+                [checked]="checkOptionSelected(option)"
+                [disabled]="readonly"
+                (change)="toggleOption(option)">{{option}}
+              </mat-checkbox>
+            </li>
+          </ul>
+
+        </div>
+
+
+      </div>
+      <button class="my-4" mat-button *ngIf="!readonly" (click)="saveAnswer()">Save answer</button>
+      <button mat-button *ngIf="readonly" (click)="deleteAnswer()">Delete answer</button>
+    </ng-container>
+
+  </mat-card-content>
+  <mat-card-footer class="qb-question__card-footer"><span>Question type: {{question.type}}</span>
+    <span>Created: {{question.creationDate | date :'medium'}}</span></mat-card-footer>
+</mat-card>

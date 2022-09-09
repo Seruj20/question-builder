@@ -1,0 +1,33 @@
+<div class="m-6">
+  <h1>Create new question</h1>
+  <form [formGroup]="createQuestionForm" (ngSubmit)="saveQuestion()">
+    <div class="my-4">
+      <h3>Question Type:</h3>
+      <mat-radio-group aria-label="Select an question Type:" formControlName="type">
+        <mat-radio-button value="SingleChoice">Single Choice</mat-radio-button>
+        <mat-radio-button value="MultipleChoice">Multiple Choice</mat-radio-button>
+        <mat-radio-button value="Open">Open</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div class="my-4">
+      <h3>Question Text:</h3>
+      <mat-form-field appearance="fill" class="w-50 p-3">
+        <mat-label>Type question here...</mat-label>
+        <textarea matInput formControlName="text"></textarea>
+      </mat-form-field>
+    </div>
+    <ng-container *ngIf="createQuestionForm.get('type')?.value && createQuestionForm.get('type')?.value !== ('Open')">
+      <div *ngFor="let option of answerOptions.controls; let i=index">
+        <mat-form-field formGroupName="answerOptions">
+          <input matInput [formControlName]="i">
+        </mat-form-field>
+        <button mat-button (click)="deleteOption(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+      <button class="my-2" mat-button type="button" (click)="addAnswerOption()"> Add option</button>
+    </ng-container>
+    <button class="my-2" mat-button [disabled]="!checkFormValidation()" type="submit"> Save question</button>
+  </form>
+  <button mat-button (click)="moveToMainPage()"> Go Back</button>
+</div>

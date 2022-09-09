@@ -1,0 +1,26 @@
+<h1>Questions List</h1>
+<button mat-button (click)="moveToMainPage()"> Go Back</button>
+<div class="qb-list-container">
+  <div class="qb-list-container-column">
+    <ng-container *ngFor="let question of unansweredQuestions">
+      <app-qb-question-card
+        [question]="question"
+        [listView]="true"
+        (deleteQuestion)="handleDeleteQuestion($event)"
+        (editQuestion)="handleEditQuestion($event)"
+        (updateQuestion)="handleQuestionUpdate($event)">
+      </app-qb-question-card>
+    </ng-container>
+  </div>
+  <div class="qb-list-container-column">
+    <ng-container *ngFor="let question of answeredQuestions">
+      <app-qb-question-card
+        [question]="question"
+        [listView]="true"
+        (deleteQuestion)="handleDeleteQuestion($event)"
+        (editQuestion)="handleEditQuestion($event)"
+        (updateQuestion)="handleQuestionUpdate($event)">
+      </app-qb-question-card>
+    </ng-container>
+  </div>
+</div>

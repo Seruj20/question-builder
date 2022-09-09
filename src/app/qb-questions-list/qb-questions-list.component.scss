@@ -1,0 +1,8 @@
+.qb-list-container{
+  display: flex;
+  flex-direction: row;
+}
+.qb-list-container-column{
+  flex-basis: 50%;
+  margin: 10px 15px;
+}

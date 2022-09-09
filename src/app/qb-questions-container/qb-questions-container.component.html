@@ -1,0 +1,13 @@
+<h1>Main Page</h1>
+<ng-container [ngSwitch]="!!questions?.length">
+  <h2 *ngSwitchDefault
+  >No questions added yet.</h2>
+  <button mat-button (click)="router.navigate(['create-page'])">Create question</button>
+  <button mat-button (click)="router.navigate(['list'])" [disabled]="!questions?.length">Go to questions list</button>
+  <app-qb-questions-management
+    *ngSwitchCase="true"
+    [questions]="questions"
+    (handleDeleteQuestion)="handleDeleteQuestions($event)"
+    (handleEditQuestion)="handleEditQuestions($event)">
+  </app-qb-questions-management>
+</ng-container>
